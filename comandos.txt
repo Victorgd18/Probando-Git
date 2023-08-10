@@ -1,0 +1,56 @@
+https://training.github.com/downloads/es_ES/github-git-cheat-sheet/
+Para configurar git:
+git config --global user.name "name"
+git config --global user.mail "mail"
+--------------------------------------
+//Basicos
+git init #inicializa git en el directorio del proyecto
+git status #ver el estado (ficheros sin añadir, los añadidos)
+git add file #añadir archivo al stage y luego poder hacer commit
+git commit -m "Mensaje de commit" #para hacer un commit
+
+git alias.name "comando completo" #para poner un alias a un comando 
+
+//Ver cambios
+git log #para revisar los commit realizados
+git restore file #para devolver el fichero al estado del ultimo commit
+git diff #Muestra los cambios desde el ultimo commit
+git checkout file or sha #Vuelve a un estado anterior del archivo o commit
+
+git reset --hard sha #para "borrar commits posteriores del punto sha y que ahora ese sea el nuevo main y head"
+git reflog #para ver todos los log
+
+git tag "nombre de tag" #añade un tag, (debe hacerse antes del commit) para nombre de versiones o regresar a un estado con git checkout tags/nombreDeTag
+git checkout tags/nombreDeTag #para cambiar de commit con nombre de tag.
+
+//Ramas
+git branch nombreDeRama #Para crear una Ramas
+git branch -m nombreDeRama #Para cambiar de nombre la rama actual
+git switch nombreDeRama #Para cambiar a la rama nombreDeRama
+git branch -d nombreDeRama #Para eliminar la rama
+
+//commit temporal Stash
+git stash       #Hace un commit temporal (puede usarse para codigo con errores, pero se requiere cambiar de rama)
+git stash pop   #Te regresa al ultimo stash
+git stash drop  #Elimina el ultimo stash
+
+//GitHub
+git remote add origin https://...	#Indica el origen del servidor remoto
+git push -u origin main			#Crea la rama main en el repositorio github
+git push origin --delete nombreRama	#Cuando se crea varias ramas github, se puede eliminar de esta manera.
+Por ejemplo, si deseas eliminar la rama origin/main2, puedes usar el comando git push origin --delete main2.
+
+//Solucionar problemas con nombre de las ramas
+Para cambiar el nombre de una rama en GitHub, puedes hacerlo desde la página principal del repositorio en GitHub.com. Encima de la lista de archivos, haz clic en Ramas. Junto a la rama a la que deseas cambiar el nombre, haz clic en el ícono de opciones y teclea un nombre nuevo para la rama. Luego revisa la información sobre los entornos locales y haz clic en Renombrar rama12.
+
+Después de renombrar una rama en un repositorio con GitHub, cualquier colaborador con un clon local del repositorio necesitará actualizar dicho clon. Desde el clon local del repositorio en una computadora, ejecuta los siguientes comandos para actualizar el nombre de la rama predeterminada:
+
+$ git branch -m OLD-BRANCH-NAME NEW-BRANCH-NAME
+$ git fetch origin
+$ git branch -u origin/NEW-BRANCH-NAME NEW-BRANCH-NAME
+$ git remote set-head origin -a
+Copiar
+Opcionalmente, ejecuta el siguiente comando para eliminar las referencias de rastreo al nombre de la rama antigua:
+
+$ git remote prune origin
+

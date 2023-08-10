@@ -1,3 +1,4 @@
+# This program prints the N numbers you enter and then sums them up
 def printNumbers(n):
     i=1
     for i in range(1,n+1):
